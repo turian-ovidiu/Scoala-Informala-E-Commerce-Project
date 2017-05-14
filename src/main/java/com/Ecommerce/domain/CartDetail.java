@@ -1,52 +1,71 @@
 package com.Ecommerce.domain;
 
+import javax.persistence.*;
+
 /**
  * Created by Ovi on 4/11/2017.
  */
-public class CartDetail {
-    private int id;
-    private int version;
-    private int quantity;
+@Entity
+public class CartDetail implements DomainObject{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    private Integer quantity;
+
+    @Version
+    private Integer version;
+
+    @ManyToOne
     private Cart cart;
+
+    @ManyToOne
     private Product product;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getId() {
+    @Override
+    public Integer getId() {
         return id;
     }
 
-    public int getVersion() {
+    public CartDetail() {
+        setQuantity(1);
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getVersion() {
         return version;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Cart getCart() {
         return cart;
     }
 
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public Product getProduct() {
         return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
