@@ -19,7 +19,6 @@ import java.util.List;
  */
 
 @Service
-@Profile("springdatajpa")
 @Transactional(readOnly = true)
 public class ProductServiceImpRepo implements ProductService {
 

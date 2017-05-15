@@ -16,9 +16,9 @@ import java.util.List;
  * Created by Ovi on 5/14/2017.
  */
 
-@Transactional(readOnly = true)
+
 @Service
-@Profile("springdatajpa")
+@Transactional(readOnly = true)
 public class CustomerServiceImpRepo implements CustomerService {
 
     private CustomerRepository customerRepository;

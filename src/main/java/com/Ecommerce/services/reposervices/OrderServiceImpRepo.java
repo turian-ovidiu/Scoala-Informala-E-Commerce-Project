@@ -6,6 +6,7 @@ import com.Ecommerce.repositories.OrderRepository;
 import com.Ecommerce.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import java.util.List;
 /**
  * Created by Ovi on 5/14/2017.
  */
+
+@Service
+@Transactional(readOnly = true)
 public class OrderServiceImpRepo implements OrderService {
 
     private OrderRepository orderRepository;

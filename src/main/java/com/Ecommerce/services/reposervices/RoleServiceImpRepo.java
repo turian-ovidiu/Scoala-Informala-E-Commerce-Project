@@ -15,7 +15,6 @@ import java.util.List;
  * Created by Ovi on 5/14/2017.
  */
 @Service
-@Profile("springdatajpa")
 @Transactional(readOnly = true)
 public class RoleServiceImpRepo implements RoleService {
 
