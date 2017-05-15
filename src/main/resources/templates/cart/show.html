@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Show Cart</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    <link href="../static/css/addressship.css"
+          th:href="@{/css/addressship.css}" rel="stylesheet" media="screen"/>
+    <style>
+        body,html{
+        background-image: url("../images/kitchen.jpg");
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+
+<div class="container" sec:authorize="isAuthenticated()">
+
+    <div th:if="${#lists.isEmpty(cart.cartDetails)}">
+        <h4 align="center" style="color: #fff">The cart is empty</h4>
+    </div>
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(cart.cartDetails)}">
+
+        <form th:object="${cart}" th:action="@{/user/next-step}" method="post">
+            <div class="panel panel-info" align="center">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{version}"/>
+                <input type="hidden" th:field="*{user}"/>
+                <input type="hidden" th:field="*{totalCost}"/>
+
+                <div th:each="cartDetails : *{cartDetails}">
+                    <input type="hidden" th:field="*{cartDetails[__${cartDetailsStat.index}__].id}"/>
+                    <input type="hidden" th:field="*{cartDetails[__${cartDetailsStat.index}__].version}"/>
+                    <input type="hidden" th:field="*{cartDetails[__${cartDetailsStat.index}__].cart}"/>
+                    <input type="hidden" th:field="*{cartDetails[__${cartDetailsStat.index}__].product}"/>
+                </div>
+                <div class="panel-heading">
+                    <h6>Cart products list</h6>
+                </div>
+
+                <table class="table table-user-information">
+                    <tr>
+                        <th>Product name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Remove</th>
+                    </tr>
+
+                    <tr th:each="cartDetail : *{cartDetails}">
+                        <td type="text" th:text="${cart.cartDetails[__${cartDetailStat.index}__].product.name}"></td>
+                        <td type="text" th:text="${cart.cartDetails[__${cartDetailStat.index}__].product.description}"></td>
+                        <td type="text" th:text="${cart.cartDetails[__${cartDetailStat.index}__].product.price}"></td>
+                        <td><input type="number"  th:field="*{cartDetails[__${cartDetailStat.index}__].quantity}"></input></td>
+                        <td align="center"><a th:href="${'/cartDetail/delete/' + cart.cartDetails[__${cartDetailStat.index}__].id}"><i class="fa fa-times"
+                                                                                                    aria-hidden="true"></i></a></td>
+
+                    </tr>
+                </table>
+                <hr class="line"></hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label><b>Total cost:</b></label>
+                        <a th:text="${#numbers.formatDecimal(cart.totalCost, 0, 'COMMA', 2, 'POINT')}"></a>
+                        <a>$</a>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">Next</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

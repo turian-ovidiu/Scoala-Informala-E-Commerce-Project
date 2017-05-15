@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Form</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/addressship.css"
+          th:href="@{/css/addressship.css}" rel="stylesheet" media="screen"/>
+
+    <style>
+        h6{
+        background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+<div class="container">
+
+    <div class="row main">
+        <div class="main-login main-center">
+            <h6>Shipping address</h6>
+            <form class="form-horizontal" th:object="${order}" th:action="@{/order/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{version}"/>
+                <input type="hidden" th:field="*{customer.id}"/>
+                <input type="hidden" th:field="*{customer.version}"/>
+                <input type="hidden" th:field="*{totalCost}"/>
+
+                <div th:each="orderDetail : *{orderDetails}">
+                    <input type="hidden" th:field="*{orderDetails[__${orderDetailStat.index}__].id}"/>
+                    <input type="hidden" th:field="*{orderDetails[__${orderDetailStat.index}__].version}"/>
+                    <input type="hidden" th:field="*{orderDetails[__${orderDetailStat.index}__].product.id}"/>
+                    <input type="hidden" th:field="*{orderDetails[__${orderDetailStat.index}__].product.version}"/>
+                    <input type="hidden" th:field="*{orderDetails[__${orderDetailStat.index}__].quantity}"/>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-address-card-o"
+                                                               aria-hidden="true"></i></span>
+                            <input type="text" th:field="*{shipToAddress.addressLine1}" autofocus="autofocus"
+                                   class="form-control" name="addressline1" id="addressline1"
+                                   placeholder="Address line one" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-address-card-o"
+                                                               aria-hidden="true"></i></span>
+                            <input type="text" th:field="*{shipToAddress.addressLine2}"
+                                   class="form-control" name="addresslinetwo" id="addresslinetwo"
+                                   placeholder="Address line two"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                            <input type="text" th:field="*{shipToAddress.cityShipping}"
+                                   class="form-control" name="city" id="city" placeholder="City" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                            <input type="text" th:field="*{shipToAddress.stateShipping}"
+                                   class="form-control" name="state" id="state" placeholder="State" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                            <input type="number" th:field="*{shipToAddress.zipCodeShipping}"
+                                   class="form-control" name="zip-code" id="zip-code"
+                                   placeholder="Zip-code" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                <h6>Order status</h6>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <ul id="ul_text" th:each="orderStatus : ${T(com.Ecommerce.domain.enums.OrderStatus).values()}">
+                                <li>
+                                    <input type="radio" th:field="*{orderStatus}" th:value="${orderStatus}" th:text="${orderStatus}"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="button" class="btn btn-primary btn-lg btn-block">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

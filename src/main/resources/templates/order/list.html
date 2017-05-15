@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <title>List Orders</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/intro.css"
+          th:href="@{/css/intro.css}" rel="stylesheet" media="screen"/>
+
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+
+<div class="container">
+
+    <div th:if="${#lists.isEmpty(orders)}">
+        <h2 align="center" style="color: #FFF">No orders</h2>
+    </div>
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(orders)}">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Orders</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Customer first name</th>
+                    <th>Customer last name</th>
+                    <th>Order status</th>
+                    <th>Date/Time</th>
+                    <th>Order cost</th>
+                    <th>View</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.customer.firstName}"></td>
+                    <td th:text="${order.customer.lastName}"></td>
+                    <td th:text="${order.orderStatus}"></td>
+                    <td th:text="${#dates.format(order.dateShipped, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${#numbers.formatDecimal(order.totalCost, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td><a th:href="${'/order/show/' + order.id}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                    <td><a th:href="${'/order/edit/' + order.id}" sec:authorize="hasAuthority('ADMIN')"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                    <td><a th:href="${'/order/delete/' + order.id}" sec:authorize="hasAuthority('ADMIN')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

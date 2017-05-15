@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show Product</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <style>
+        .col-md-6 {
+        width: 47%;
+        }
+    </style>
+
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+<div class="container">
+
+    <div class="col-xs-6 col-sm-3"></div>
+    <div class="col-md-6">
+         <span class="thumbnail">
+                    <img th:src="@{'/ext-img/'+${product.imageUrl}}"></img>
+                    <h6 th:text="${product.name}"><b>Product Name</b></h6>
+					<p th:text="${product.description}">Description </p>
+                    <hr class="line"></hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+                            <label class="price" th:text="${product.price}"></label>
+                            <label>$</label>
+						</div>
+                        <div class="col-md-6 col-sm-6">
+                            <a th:href="${'/product/edit/' + product.id}" class="btn btn-warning btn-lg"
+                               style="float: center"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a th:href="${'/product/delete/' + product.id}" class="btn btn-lg btn-danger"
+                               style="float: right"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</div>
+					</div>
+         </span>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Show Customer</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/intro.css"
+          th:href="@{/css/intro.css}" rel="stylesheet" media="screen"/>
+
+
+</head>
+<body>
+
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+
+<div class="container">
+    <h2 sec:authorize="!isAuthenticated()" style="color:#FAFAFA" align="center">Login first</h2>
+
+    <div class="container" sec:authorize="isAuthenticated()">
+
+        <div class="col-sm-12 toppad">
+            <div class="panel panel-info" align="center">
+                <div class="panel-heading">
+                    <h6>Customer</h6>
+                </div>
+                <table class="table table-user-information">
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                        <th>Address line one</th>
+                        <th>Address line two</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip-code</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${customer.firstName}"></td>
+                        <td th:text="${customer.lastName}"></td>
+                        <td th:text="${customer.email}"></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.billingAddress.addressLineOne}"></td>
+                        <td th:text="${customer.billingAddress.addressLineTwo}"></td>
+                        <td th:text="${customer.billingAddress.city}"></td>
+                        <td th:text="${customer.billingAddress.state}"></td>
+                        <td th:text="${customer.billingAddress.zipCode}"></td>
+                    </tr>
+                </table>
+                <hr class="line"></hr>
+                <div class="row" sec:authorize="hasAuthority('ADMIN')">
+                    <div class="col-md-4" >
+                        <a th:href="${'/order/listID/' + customer.id}" class="btn btn-primary" >Orders</a>
+                        <a sec:authorize="hasAuthority('SUPERUSER')"></a>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <a th:href="${'/user/edit/' + customer.user.id}" class="btn btn-warning">Edit profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:if="${customer.shippingAddress} == null">
+            <h5 style="color:#FAFAFA" align="center">No shipping address</h5>
+        </div>
+        <div class="col-sm-12 toppad" th:if="${customer.shippingAddress} != null">
+            <div class="panel panel-info" align="center">
+                <div class="panel-heading">
+                    <h6>Address shipping </h6>
+                </div>
+                <table class="table table-user-information">
+                    <tr>
+                        <th>Address line one</th>
+                        <th>Address line two</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip-code</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${customer.shippingAddress.addressLine1}"></td>
+                        <td th:text="${customer.shippingAddress.addressLine2}"></td>
+                        <td th:text="${customer.shippingAddress.cityShipping}"></td>
+                        <td th:text="${customer.shippingAddress.stateShipping}"></td>
+                        <td th:text="${customer.shippingAddress.zipCodeShipping}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

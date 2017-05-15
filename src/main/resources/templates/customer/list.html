@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <title>List Customers</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/intro.css"
+          th:href="@{/css/intro.css}" rel="stylesheet" media="screen"/>
+
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+
+<div class="container" sec:authorize="hasAuthority('ADMIN')">
+    <div th:if="${#lists.isEmpty(customers)}">
+        <h2 align="center">No customers to display</h2>
+    </div>
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(customers)}">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Customers</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Role</th>
+                    <th>Date created</th>
+                    <th>Stats</th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.user.username}"></td>
+                    <td th:text="${customer.firstName}"></td>
+                    <td th:text="${customer.lastName}"></td>
+                    <td th:each="role : ${customer.user.roles}" th:text="${role.role}"></td>
+                    <td th:each="role : ${customer.user.roles}" th:text="${role.dateCreated}"></td>
+                    <td><a th:href="${'/stats/show/' + customer.id}"><i class="fa fa-area-chart" aria-hidden="true"></i></a>
+                    </td>
+                    <td><a th:href="${'/customer/show/' + customer.id}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    </td>
+                    <td><a th:href="${'/user/edit/' + customer.user.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </td>
+                    <td><a th:href="${'/user/delete/' + customer.user.id}"><i class="fa fa-trash-o"
+                                                                              aria-hidden="true"></i></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container" sec:authorize="hasAuthority('SUPERUSER')">
+    <div th:if="${#lists.isEmpty(customers)}">
+        <h2 align="center">No customers to display</h2>
+    </div>
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(customers)}">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Customers</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Role</th>
+                    <th>Date created</th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                </tr>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.id}"></td>
+                    <td th:text="${customer.user.username}"></td>
+                    <td th:text="${customer.firstName}"></td>
+                    <td th:text="${customer.lastName}"></td>
+                    <td th:each="role : ${customer.user.roles}" th:text="${role.role}"></td>
+                    <td th:each="role : ${customer.user.roles}" th:text="${role.dateCreated}"></td>
+                    <td><a th:href="${'/customer/show/' + customer.id}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    </td>
+                    <td><a th:href="${'/user/edit/' + customer.user.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

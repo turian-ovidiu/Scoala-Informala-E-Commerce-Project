@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Stats</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    <style>
+
+        body,html{
+        background-image: url("../images/intro.jpg");
+        }
+
+    </style>
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+<div class="container">
+
+    <div class="col-sm-12 toppad" sec:authorize="hasAuthority('ADMIN')">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>General</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Customers</th>
+                    <th>Products</th>
+                    <th>Orders</th>
+                    <th>Min order</th>
+                    <th>Max order</th>
+                    <th>Avg order</th>
+                    <th>Least bought</th>
+                    <th>Most bought</th>
+                </tr>
+                <tr>
+                    <td th:text="${countCustomers}"></td>
+                    <td th:text="${countProducts}"></td>
+                    <td th:text="${countOrders}"></td>
+                    <td th:text="${#numbers.formatDecimal(minOrder, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(maxOrder, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(averageOrder, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${leastBought.name}"></td>
+                    <td th:text="${mostBought.name}"></td>
+                </tr>
+            </table>
+            <hr class="line"></hr>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

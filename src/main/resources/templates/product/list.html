@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+    <title>List Products</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+<div class="container">
+
+    <div th:if="${#lists.isEmpty(products)}">
+        <h4 align="center" style="color: #fff">No products</h4>
+    </div>
+
+
+    <div th:if="${not #lists.isEmpty(products)}" sec:authorize="!isAuthenticated()">
+        <div class="col-md-3 col-sm-6" th:each="product : ${products}">
+				<span class="thumbnail">
+                    <img  th:src="@{'/ext-img/'+${product.imageUrl}}"></img>
+                    <h6 th:text="${product.name}"><b>Product Name</b></h6>
+					<p th:text="${product.description}">Description </p>
+                    <hr class="line"></hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+                            <label class="price" th:text="${product.price}"></label>
+                            <label>$</label>
+						</div>
+						<div class="col-md-6 col-sm-6">
+                            <a th:href="${'/product/addProduct/' + product.id}" class="btn btn-lg btn-primary btn-circle" style="float: right" ><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
+						</div>
+					</div>
+				</span>
+        </div>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(products)}" sec:authorize="hasAuthority('CUSTOMER')">
+        <div class="col-md-3 col-sm-6" th:each="product : ${products}">
+				<span class="thumbnail">
+                    <img  th:src="@{'/ext-img/'+${product.imageUrl}}"></img>
+                    <h6 th:text="${product.name}"><b>Product Name</b></h6>
+					<p th:text="${product.description}">Description </p>
+                    <hr class="line"></hr>
+					<div class="row">
+						<div class="col-md-6 col-sm-6">
+                            <label class="price" th:text="${product.price}"></label>
+                            <label>$</label>
+						</div>
+						<div class="col-md-6 col-sm-6">
+                            <a th:href="${'/product/addProduct/' + product.id}" class="btn btn-lg btn-primary btn-circle" style="float: right" ><i class="fa fa-cart-arrow-down" aria-hidden="true" ></i></a>
+						</div>
+					</div>
+				</span>
+        </div>
+    </div>
+
+
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(products)}" sec:authorize="hasAuthority('ADMIN')">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Products</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price$</th>
+                    <th>Image</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.imageUrl}"></td>
+                    <td><a th:href="${'/product/show/' + product.id}"><i class="fa fa-eye" aria-hidden="true"></i></a> </td>
+                    <td><a th:href="${'/product/edit/' + product.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a> </td>
+                    <td><a th:href="${'/product/delete/' + product.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> </td>
+                </tr>
+            </table>
+
+            <hr class="line"></hr>
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <a th:href="${'/product/new/'}" class="btn btn-lg btn-primary btn-circle" style="float: right" ><i class="fa fa-plus" ></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

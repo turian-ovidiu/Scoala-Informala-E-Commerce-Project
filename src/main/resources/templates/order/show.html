@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <title> Oder show</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/intro.css"
+          th:href="@{/css/intro.css}" rel="stylesheet" media="screen"/>
+
+</head>
+<body>
+
+<!--/*/ <th:block th:include="fragments/headerN :: headerN"></th:block> /*/-->
+
+<h2 sec:authorize="!isAuthenticated()">You need to log in</h2>
+
+<div class="container" sec:authorize="isAuthenticated()">
+
+    <div class="col-sm-12 toppad">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Customer</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Address line one</th>
+                    <th>Address line two</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip-code</th>
+                </tr>
+                <tr>
+                    <td th:text="${order.customer.firstName}"></td>
+                    <td th:text="${order.customer.lastName}"></td>
+                    <td th:text="${order.customer.email}"></td>
+                    <td th:text="${order.customer.phoneNumber}"></td>
+                    <td th:text="${order.customer.billingAddress.addressLineOne}"></td>
+                    <td th:text="${order.customer.billingAddress.addressLineTwo}"></td>
+                    <td th:text="${order.customer.billingAddress.city}"></td>
+                    <td th:text="${order.customer.billingAddress.state}"></td>
+                    <td th:text="${order.customer.billingAddress.zipCode}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div th:if="${order.shipToAddress == null}">
+        <h4 style="color: #fff">No Shipping address</h4>
+    </div>
+    <div class="col-sm-12 toppad" th:if="${order.shipToAddress != null}">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Shipping address </h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Address line one</th>
+                    <th>Address line two</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip-code</th>
+                </tr>
+                <tr>
+                    <td th:text="${order.shipToAddress.addressLine1}"></td>
+                    <td th:text="${order.shipToAddress.addressLine2}"></td>
+                    <td th:text="${order.shipToAddress.cityShipping}"></td>
+                    <td th:text="${order.shipToAddress.stateShipping}"></td>
+                    <td th:text="${order.shipToAddress.zipCodeShipping}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div th:if="${#lists.isEmpty(order.orderDetails)}">
+        <h4>No products</h4>
+    </div>
+
+    <div class="col-sm-12 toppad" th:if="${not #lists.isEmpty(order.orderDetails)}">
+        <div class="panel panel-info" align="center">
+            <div class="panel-heading">
+                <h6>Order products list</h6>
+            </div>
+            <table class="table table-user-information">
+                <tr>
+                    <th>Product name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Date/Time</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+                </tr>
+                <tr th:each="orderDetail : ${order.orderDetails}">
+                    <td th:text="${orderDetail.product.name}"></td>
+                    <td th:text="${orderDetail.product.description}"></td>
+                    <td th:text="${orderDetail.product.price}"></td>
+                    <td th:text="${orderDetail.quantity}"></td>
+                    <td th:text="${orderDetail.dateCreated}"></td>
+                    <td><a sec:authorize="hasAuthority('ADMIN')"
+                           th:href="${'/orderDetail/delete/' + orderDetail.id}">Delete</a></td>
+                </tr>
+            </table>
+            <hr class="line"></hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <label><b>Total cost:</b></label>
+                    <a th:text="${#numbers.formatDecimal(order.totalCost, 0, 'COMMA', 2, 'POINT')}"></a>
+                    <a>$</a>
+                </div>
+                <div class="col-md-4">
+                    <label><b>Order status:</b></label>
+                    <a type="text" th:text="${order.orderStatus}"></a>
+                </div>
+                <div class="col-md-4">
+                    <a th:href="${'/order/listID/' + order.customer.id}" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">Customer orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

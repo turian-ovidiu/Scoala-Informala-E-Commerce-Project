@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <title>Hamburger Menu</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+
+<div th:fragment="headerN">
+
+    <div class="navbar navbar-inverse navbar-fixed-right opaque-navbar">
+        <div class="nav navbar-home">
+            <a class="btn btn-danger" th:href="${'/index'}"><i class="fa fa-home" aria-hidden="true"></i></a>
+        </div>
+
+        <form class="navbar-form navbar-right" th:action="@{/customer/search(userInput=${customerName})}"
+              method="post" sec:authorize="hasAuthority('ADMIN')">
+            <div class="nav navbar-searchC">
+                <input type="text" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control"
+                       name="customerName" id="customerName" th:value="${customerName}"
+                       placeholder="Search customer"/>
+                <button type="submit" name="submit" value="value" class="btn btn-primary"><span
+                        class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form>
+
+        <div sec:authorize="!hasAuthority('SUPERUSER')">
+            <form class="navbar-form navbar-right" th:action="@{/product/search(userInput=${productName})}"
+                  method="post"
+                  sec:authorize="isAuthenticated()">
+                <div class="nav navbar-searchP">
+                    <input type="text" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control"
+                           name="productName" id="productName" th:value="${productName}"
+                           placeholder="Search product , ingredient.."/>
+                    <button type="submit" name="submit" value="value" class="btn btn-primary"><span
+                            class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="nav navbar-signin">
+            <a class="btn btn-danger" th:href="@{/login}" sec:authorize="!isAuthenticated()">Sign In</a>
+            <a class="btn btn-danger" th:href="@{/logout}" sec:authorize="isAuthenticated()">Sign Out</a>
+        </div>
+        <div class="nav navbar-welcome" sec:authorize="!hasAuthority('SUPERUSER')">
+            <a class="btn btn-danger" th:href="${'/user/show-account/'+username}" sec:authorize="isAuthenticated()">Account</a>
+        </div>
+        <div class="nav navbar-cart">
+            <a class="btn btn-danger" th:href="${'/cart/show'}" sec:authorize="hasAuthority('CUSTOMER')">Cart <span
+                    class="badge" th:text="${countCartProducts}"></span></a>
+        </div>
+
+    </div>
+
+
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#" align="center" sec:authorize="!isAuthenticated()"><i class="fa fa-cutlery"></i>
+                        - MENU -
+                    </a>
+                    <a href="#" align="center" sec:authorize="hasAuthority('CUSTOMER')"><i class="fa fa-cutlery"></i>
+                        - MENU -
+                    </a>
+                    <a href="#" align="center" sec:authorize="hasAuthority('ADMIN')">
+                        -Control Panel-
+                    </a>
+                </li>
+                <li sec:authorize="!hasAuthority('ADMIN')">
+                    <a th:href="@{/product/list/burgers}" align="left-side"
+                       sec:authorize="!isAuthenticated()">Burgers</a>
+                    <a th:href="@{/product/list/burgers}" align="left-side" sec:authorize="hasAuthority('CUSTOMER')">Burgers</a>
+                    <!--
+                    <a  th:href="@{/product/list}" align="left-side" sec:authorize="hasAuthority('ADMIN')">Products</a>
+                    -->
+                </li>
+                <li class="dropdown" sec:authorize="hasAuthority('ADMIN')">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a th:href="@{/product/list/burgers}">Burgers</a></li>
+                        <li><a th:href="@{/product/list/pasta}">Pasta</a></li>
+                        <li><a th:href="@{/product/list/pizza}">Pizza</a></li>
+                        <li><a th:href="@{/product/list/sauces}">Sauces</a></li>
+                        <li><a th:href="@{/product/list/desserts}">Desserts</a></li>
+                        <li><a th:href="@{/product/list/drinks}">Drinks</a></li>
+                    </ul>
+                </li>
+
+
+                <li sec:authorize="!hasAuthority('ADMIN')">
+                    <a th:href="@{/product/list/pasta}" align="left-side" sec:authorize="!isAuthenticated()"> Pasta</a>
+                    <a th:href="@{/product/list/pasta}" align="left-side" sec:authorize="hasAuthority('CUSTOMER')">
+                        Pasta</a>
+                </li>
+
+                <li class="dropdown" sec:authorize="hasAuthority('ADMIN')">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a th:href="@{/order/list}">All</a></li>
+                        <li><a th:href="@{/order/status-new}">New</a></li>
+                        <li><a th:href="@{/order/status-allocated}">Allocated </a></li>
+                        <li><a th:href="@{/order/status-shipped}">Shipped</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a th:href="@{/product/list/pizza}" align="left-side" sec:authorize="!isAuthenticated()"> Pizza</a>
+                    <a th:href="@{/product/list/pizza}" align="left-side" sec:authorize="hasAuthority('CUSTOMER')">
+                        Pizza</a>
+                    <a th:href="@{/customer/list}" align="left-side" sec:authorize="hasAuthority('ADMIN')">
+                        Customers</a>
+                    <a th:href="@{/customer/list}" align="left-side" sec:authorize="hasAuthority('SUPERUSER')">
+                        Customers</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/list/sauces}" align="left-side" sec:authorize="!isAuthenticated()">
+                        Sauces</a>
+                    <a th:href="@{/product/list/sauces}" align="left-side" sec:authorize="hasAuthority('CUSTOMER')">
+                        Sauces</a>
+                    <a href="#" th:href="@{/stats}" align="left-side" sec:authorize="hasAuthority('ADMIN')"> Stats</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/list/desserts}" align="left-side"
+                       sec:authorize="!isAuthenticated()">Desserts</a>
+                    <a th:href="@{/product/list/desserts}" sec:authorize="hasAuthority('CUSTOMER')">Desserts</a>
+                </li>
+                <li>
+                    <a th:href="@{/product/list/drinks}" align="left-side" sec:authorize="!isAuthenticated()">
+                        Drinks</a>
+                    <a th:href="@{/product/list/drinks}" align="left-side" sec:authorize="hasAuthority('CUSTOMER')">
+                        Drinks</a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+
+            <div class="container">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
