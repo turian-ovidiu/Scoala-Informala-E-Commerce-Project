@@ -13,8 +13,9 @@ html {
   height: 100%;
   background-image: url("../images/rsz_pexels-photo-366968.jpg");
   font-family: 'Roboto', sans-serif;
+  background-repeat: repeat;
   /*font-family: "Times New Roman", Georgia, Serif;*/
-  
+
 }
 
 .nav .open > a {

@@ -6,7 +6,7 @@
 }
 
 body, html{
- 	background-repeat: no-repeat;
+ 	background-repeat: repeat;
  	font-family: 'Oxygen', sans-serif;
 	    background-size: cover;
 

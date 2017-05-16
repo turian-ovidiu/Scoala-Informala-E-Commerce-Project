@@ -1,4 +1,5 @@
 package com.Ecommerce.starter;
+
 import com.Ecommerce.domain.*;
 import com.Ecommerce.domain.enums.OrderStatus;
 import com.Ecommerce.domain.security.Role;
@@ -51,11 +52,9 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         loadUsersAndCustomers();
         loadCarts();
         loadOrderHistory();
-        loadOrderHistory2();
         loadSuperUser();
 
     }
-
 
 
     private void loadOrderHistory() {
@@ -66,6 +65,12 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
             Order order = new Order();
             order.setCustomer(user.getCustomer());
             order.setOrderStatus(OrderStatus.SHIPPED);
+            AddressShipping addressShipping = new AddressShipping();
+            addressShipping.setCityShipping("Cluj-Napoca");
+            addressShipping.setStateShipping("Cluj");
+            addressShipping.setAddressLine1("Str. Memorandului , nr. 21");
+            addressShipping.setZipCodeShipping("43225");
+            order.setShipToAddress(addressShipping);
 
 
             products.forEach(product -> {
@@ -73,36 +78,13 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
                 orderDetail.setProduct(product);
                 orderDetail.setQuantity(1);
                 order.addToOrderDetails(orderDetail);
+
             });
             order.calculateTotalCost();
             orderService.saveOrUpdate(order);
         });
     }
 
-    private void loadOrderHistory2() {
-        List<User> users = (List<User>) userService.listAll();
-        List<Product> products = (List<Product>) productService.listAll();
-
-        users.forEach(user -> {
-            Order order = new Order();
-            order.setCustomer(user.getCustomer());
-            order.setOrderStatus(OrderStatus.SHIPPED);
-
-            //AddressShipping addressShipping = new AddressShipping();
-            // addressShipping.setCityShipping("Barcelona");
-            // order.setShipToAddress(addressShipping);
-
-
-            products.forEach(product -> {
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setProduct(product);
-                orderDetail.setQuantity(5);
-                order.addToOrderDetails(orderDetail);
-            });
-            order.calculateTotalCost();
-            orderService.saveOrUpdate(order);
-        });
-    }
 
     private void loadCarts() {
         List<User> users = (List<User>) userService.listAll();
@@ -118,7 +100,6 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
             userService.saveOrUpdate(user);
         });
     }
-
 
 
     public void loadUsersAndCustomers() {
@@ -153,13 +134,10 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         userService.saveOrUpdate(user1);
 
 
-
         User user2 = new User();
         user2.setUsername("admin");
         user2.setPassword("admin");
         user2.getRoles().add(adminRole);
-
-
 
         Customer customer2 = new Customer();
         customer2.setFirstName("Captain Jack");
@@ -179,15 +157,15 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         user2.setCustomer(customer2);
         userService.saveOrUpdate(user2);
 
+
         User user3 = new User();
         user3.setUsername("user3");
         user3.setPassword("user3");
         user3.getRoles().add(new Role());
 
-
         Customer customer3 = new Customer();
-        customer3.setFirstName("Micheal");
-        customer3.setLastName("Fiona");
+        customer3.setFirstName("Michael");
+        customer3.setLastName("John");
         customer3.setBillingAddress(new Address());
         customer3.getBillingAddress().setAddressLineOne("7 Main St");
         customer3.getBillingAddress().setCity("Los Angeles");
@@ -206,7 +184,7 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
 
     }
 
-    public void loadSuperUser(){
+    public void loadSuperUser() {
         Role superUserRole = new Role();
         superUserRole.setRole("SUPERUSER");
 
@@ -255,14 +233,14 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         labskausBurger.setImageUrl("Labskaus Burger.jpg");
         productService.saveOrUpdate(labskausBurger);
 
-        Product speedyChiliSteakPasta  = new Product();
+        Product speedyChiliSteakPasta = new Product();
         speedyChiliSteakPasta.setName("Speedy chili steak pasta");
         speedyChiliSteakPasta.setDescription("Ingredients: beef, garlic, chili peppers, soy sauce, chili sauce.");
         speedyChiliSteakPasta.setPrice(21.99);
         speedyChiliSteakPasta.setImageUrl("Speedy chili steak pasta.jpg");
         productService.saveOrUpdate(speedyChiliSteakPasta);
 
-        Product asianBowlWithSalmonPasta  = new Product();
+        Product asianBowlWithSalmonPasta = new Product();
         asianBowlWithSalmonPasta.setName("Asian bowl, salmon pasta");
         asianBowlWithSalmonPasta.setDescription("Ingredients: salmon, broccoli, sugar, ginger, garlic, garlic onions.");
         asianBowlWithSalmonPasta.setPrice(24.99);
@@ -271,28 +249,28 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
 
 
         //Pizza
-        Product filletOfBreadPizza  = new Product();
+        Product filletOfBreadPizza = new Product();
         filletOfBreadPizza.setName("Fillet of bread pizza");
         filletOfBreadPizza.setDescription("Ingredients: garlic, onion, tomtoes, cherry tomatoes, feta, basil, baby spinach.");
         filletOfBreadPizza.setPrice(20.20);
         filletOfBreadPizza.setImageUrl("Fillet of bread pizza.jpg");
         productService.saveOrUpdate(filletOfBreadPizza);
 
-        Product paleoPizza  = new Product();
+        Product paleoPizza = new Product();
         paleoPizza.setName("Paleo pizza");
         paleoPizza.setDescription("Ingredients: sweet potato, green cabbage, caramelised onions, creem, sage.");
         paleoPizza.setPrice(23.99);
         paleoPizza.setImageUrl("Paleo pizza.jpg");
         productService.saveOrUpdate(paleoPizza);
 
-        Product asparagusPizza  = new Product();
+        Product asparagusPizza = new Product();
         asparagusPizza.setName("Asparagus pizza");
         asparagusPizza.setDescription("Ingredients: asparagus, camembert, parmesan, mozzarella with melting camembert border.");
         asparagusPizza.setPrice(25.99);
         asparagusPizza.setImageUrl("Asparagus pizza.jpg");
         productService.saveOrUpdate(asparagusPizza);
 
-        Product artichokesAndRicottaPizza  = new Product();
+        Product artichokesAndRicottaPizza = new Product();
         artichokesAndRicottaPizza.setName("Artichokes pizza");
         artichokesAndRicottaPizza.setDescription("Ingredients: artichokes, ricotta, ham, salami, parmesan, rocola, chives, basil.");
         artichokesAndRicottaPizza.setPrice(23.78);
@@ -301,14 +279,14 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
 
 
         //Sauces
-        Product chiliGarlicSauce  = new Product();
+        Product chiliGarlicSauce = new Product();
         chiliGarlicSauce.setName("Chili garlic sauce");
         chiliGarlicSauce.setDescription("Ingredients: chile peppers, garlic, fresh ginger, vinegar, sugar.");
         chiliGarlicSauce.setPrice(4.99);
         chiliGarlicSauce.setImageUrl("Chili Garlic Sauce.jpg");
         productService.saveOrUpdate(chiliGarlicSauce);
 
-        Product spicyBarbecueSauce  = new Product();
+        Product spicyBarbecueSauce = new Product();
         spicyBarbecueSauce.setName("Spicy barbecue sauce");
         spicyBarbecueSauce.setDescription("Ingredients: fresh garlic, sweet onion, jalapeno pepper, vinegar, olive oil.");
         spicyBarbecueSauce.setPrice(4.22);
@@ -316,14 +294,14 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         productService.saveOrUpdate(spicyBarbecueSauce);
 
         //Deserts
-        Product nutellaCheesecakesDessert  = new Product();
+        Product nutellaCheesecakesDessert = new Product();
         nutellaCheesecakesDessert.setName("Nutella dessert");
         nutellaCheesecakesDessert.setDescription("Ingredients: whole-grain butter biscuits, butter, nougat cream, hazelnuts, fresh cheese, sugar.");
         nutellaCheesecakesDessert.setPrice(15.99);
         nutellaCheesecakesDessert.setImageUrl("Nutella Cheesecakes.jpg");
         productService.saveOrUpdate(nutellaCheesecakesDessert);
 
-        Product appleCheesecakeDessert  = new Product();
+        Product appleCheesecakeDessert = new Product();
         appleCheesecakeDessert.setName("Apple cheesecake dessert");
         appleCheesecakeDessert.setDescription("Ingredients : flour, cinnamon, apples, lime juice, olive oil, sugar, cheese, butter, cream");
         appleCheesecakeDessert.setPrice(16.99);
@@ -331,14 +309,14 @@ public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {
         productService.saveOrUpdate(appleCheesecakeDessert);
 
         //Drinks
-        Product coffee  = new Product();
+        Product coffee = new Product();
         coffee.setName("Drink: Natural coffee");
         coffee.setDescription("Coffee time, strong flavor.");
         coffee.setPrice(3.99);
         coffee.setImageUrl("coffee.jpg");
         productService.saveOrUpdate(coffee);
 
-        Product lemonade  = new Product();
+        Product lemonade = new Product();
         lemonade.setName("Drink: Lemonade");
         lemonade.setDescription("Fresh lemonade with honey.");
         lemonade.setPrice(7.99);

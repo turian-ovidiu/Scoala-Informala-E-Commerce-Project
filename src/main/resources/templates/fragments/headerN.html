@@ -20,7 +20,7 @@
             <div class="nav navbar-searchC">
                 <input type="text" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control"
                        name="customerName" id="customerName" th:value="${customerName}"
-                       placeholder="Search customer"/>
+                       placeholder="Search customer" required="required"/>
                 <button type="submit" name="submit" value="value" class="btn btn-primary"><span
                         class="glyphicon glyphicon-search"></span></button>
             </div>
@@ -33,7 +33,7 @@
                 <div class="nav navbar-searchP">
                     <input type="text" pattern="[a-zA-Z]+" title="Only enter letters" class="form-control"
                            name="productName" id="productName" th:value="${productName}"
-                           placeholder="Search product , ingredient.."/>
+                           placeholder="Search product , ingredient.." required="required"/>
                     <button type="submit" name="submit" value="value" class="btn btn-primary"><span
                             class="glyphicon glyphicon-search"></span></button>
                 </div>
