@@ -1,7 +1,8 @@
 package com.Ecommerce.domain.enums;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This class represent Order Status enum.
  */
 public enum OrderStatus {
 

@@ -3,7 +3,8 @@ package com.Ecommerce.services.security;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for EncryptionService implementation.
  */
 public interface EncryptionService {
 

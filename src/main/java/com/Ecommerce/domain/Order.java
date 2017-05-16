@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This class represent Order Entity.
  */
 @Entity
 @Table(name = "ORDER_HEADER")
@@ -33,7 +34,6 @@ public class Order extends AbstractDomain{
     private Date dateShipped;
 
     private Double totalCost = 0.0;
-
 
 
     public Customer getCustomer() {

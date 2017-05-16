@@ -14,7 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This class represent the implementation of OrderService interface.
  */
 
 @Service
@@ -104,10 +105,6 @@ public class OrderServiceImpRepo implements OrderService {
         return orderRepository.findCountByCustomer(customer);
     }
 
-    @Override
-    public List<Order> findOrdersByDateShippedContains(Date date) {
-        return orderRepository.findOrdersByDateShippedContains(date);
-    }
 
     @Override
     public Order finalizeOrder(User user, AddressShipping addressShipping) {

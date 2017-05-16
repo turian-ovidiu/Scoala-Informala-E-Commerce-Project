@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent Cart Detail Controller.
  */
 @Controller
 public class CartDetailController {

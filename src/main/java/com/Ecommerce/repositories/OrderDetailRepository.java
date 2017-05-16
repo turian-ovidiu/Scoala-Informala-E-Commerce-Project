@@ -7,7 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for Order Detail Repository.
  */
 public interface OrderDetailRepository extends CrudRepository<OrderDetail,Integer> {
 

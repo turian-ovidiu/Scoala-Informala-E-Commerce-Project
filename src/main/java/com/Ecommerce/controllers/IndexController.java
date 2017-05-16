@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent Index Controller.
  */
 
 @Controller

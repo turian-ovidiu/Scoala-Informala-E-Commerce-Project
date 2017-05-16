@@ -17,10 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent User Controller.
  */
 
 @Controller

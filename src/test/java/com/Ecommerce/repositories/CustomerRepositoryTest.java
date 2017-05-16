@@ -13,7 +13,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidiu.
+ * This class represent the customer repository test.
  */
 
 @RunWith(SpringRunner.class)

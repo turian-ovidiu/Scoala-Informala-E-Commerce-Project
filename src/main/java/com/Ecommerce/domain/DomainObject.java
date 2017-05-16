@@ -1,7 +1,8 @@
 package com.Ecommerce.domain;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This Interface represent Domain Object.
  */
 public interface DomainObject {
 

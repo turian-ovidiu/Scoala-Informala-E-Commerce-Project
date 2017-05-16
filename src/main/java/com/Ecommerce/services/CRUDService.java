@@ -3,7 +3,8 @@ package com.Ecommerce.services;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for all Service interfaces.
  */
 public interface CRUDService<T> {
 

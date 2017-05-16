@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidiu.
+ * This class represent Order Detail Controller.
  */
 @Controller
 public class OrderDetailController {

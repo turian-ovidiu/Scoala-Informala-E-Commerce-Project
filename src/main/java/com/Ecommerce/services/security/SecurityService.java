@@ -1,7 +1,8 @@
 package com.Ecommerce.services.security;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for SecurityService implementation.
  */
 public interface SecurityService {
 

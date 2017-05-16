@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This class represent the implementation of EncryptionService interface.
  */
 @Service
 public class EncryptionServiceImp implements EncryptionService{

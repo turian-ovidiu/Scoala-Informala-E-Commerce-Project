@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
 /**
- * Created by Ovi.
+ * Created by Turian Ovidiu.
+ * This class represent Stats Controller.
  */
 
 @Controller

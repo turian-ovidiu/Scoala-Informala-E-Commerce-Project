@@ -7,7 +7,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidiu.
+ * This class extends WebMvcConfigurerAdapter and add resource handler configuration.
  */
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurerAdapter {

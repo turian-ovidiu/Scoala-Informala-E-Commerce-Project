@@ -19,7 +19,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by Ovi.
+ * Created by Turian Ovidiu.
+ * This class represent the User service unit tests.
  */
 
 public class UserServiceTest {

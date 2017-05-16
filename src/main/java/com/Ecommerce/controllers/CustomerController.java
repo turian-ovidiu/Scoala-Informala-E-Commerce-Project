@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent Customer Controller.
  */
 @Controller
 public class CustomerController {

@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for Order Repository.
  */
 public interface OrderRepository extends CrudRepository<Order,Integer> {
 

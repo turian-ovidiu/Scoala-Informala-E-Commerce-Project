@@ -5,7 +5,8 @@ import com.Ecommerce.domain.Product;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for OrderDetailService implementation.
  */
 public interface OrderDetailService extends CRUDService<OrderDetail>{
 

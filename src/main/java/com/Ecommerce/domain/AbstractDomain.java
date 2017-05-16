@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This is a superclass and represent Abstract Domain.
  */
 
 @MappedSuperclass
@@ -17,8 +18,8 @@ public abstract class AbstractDomain implements DomainObject{
     @Version
     private Integer version;
 
-
     private Date dateCreated;
+
     private Date lastUpdated;
 
     @Override

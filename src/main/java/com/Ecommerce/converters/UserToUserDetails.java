@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent the implementation of Converter interface.
+ * This class will convert a User to UserDetails.
  */
 @Component
 public class UserToUserDetails implements Converter<User,UserDetails>{

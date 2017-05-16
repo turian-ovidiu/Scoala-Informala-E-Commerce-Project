@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidiu.
+ * This class represent a starter class that implements ApplicationListener.
+ * When the application starts, this class will load some users, products, carts and orders for demonstration purpose.
  */
 @Component
 public class JPAStarter implements ApplicationListener<ContextRefreshedEvent> {

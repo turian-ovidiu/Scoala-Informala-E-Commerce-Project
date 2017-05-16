@@ -18,7 +18,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidiu.
+ * This class represent the Order Detail service unit tests.
  */
 public class OrderDetailServiceTest {
 

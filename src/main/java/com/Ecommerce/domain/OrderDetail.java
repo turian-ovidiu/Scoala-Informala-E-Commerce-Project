@@ -4,7 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This class represent OrderDetail Entity.
  */
 @Entity
 public class OrderDetail extends AbstractDomain{

@@ -4,7 +4,8 @@ import com.Ecommerce.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for User Repository.
  */
 public interface UserRepository extends CrudRepository<User, Integer> {
 

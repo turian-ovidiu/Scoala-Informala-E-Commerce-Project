@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This class represent User Entity.
  */
 
 @Entity
 public class User implements DomainObject{
-
 
 
     @Id
@@ -31,7 +31,6 @@ public class User implements DomainObject{
     @Transient
     private String password;
 
-
     private String encryptedPassword;
 
     private Boolean enabled = true;
@@ -46,7 +45,6 @@ public class User implements DomainObject{
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-
     private List<Role> roles;
 
     private Integer failedLoginAttempts = 0;

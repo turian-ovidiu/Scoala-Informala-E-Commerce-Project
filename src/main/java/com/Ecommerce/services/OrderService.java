@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for OrderService implementation.
  */
 public interface OrderService extends CRUDService<Order>{
 
@@ -31,8 +32,6 @@ public interface OrderService extends CRUDService<Order>{
     Double findMaximumByCustomer(@Param("customer") Customer customer);
 
     Integer findCountByCustomer(@Param("customer") Customer customer);
-
-    List<Order> findOrdersByDateShippedContains(Date date);
 
     Order finalizeOrder(User user, AddressShipping addressShipping);
 }

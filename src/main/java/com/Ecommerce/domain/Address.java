@@ -3,7 +3,8 @@ package com.Ecommerce.domain;
 import javax.persistence.Embeddable;
 
 /**
- * Created by Ovi on 4/11/2017.
+ * Created by Turian Ovidiu.
+ * This class represent Address Embeddable.
  */
 
 @Embeddable

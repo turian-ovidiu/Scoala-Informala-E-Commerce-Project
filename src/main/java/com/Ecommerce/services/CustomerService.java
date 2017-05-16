@@ -5,7 +5,8 @@ import com.Ecommerce.domain.Customer;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for CustomerService implementation.
  */
 public interface CustomerService extends CRUDService<Customer>{
 

@@ -18,7 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * Created by Ovi .
+ * Created by Turian Ovidiu.
+ * This class represent the Security Configuration for the Application.
  */
 
 @Configuration

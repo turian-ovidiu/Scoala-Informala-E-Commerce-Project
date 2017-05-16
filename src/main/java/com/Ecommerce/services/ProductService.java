@@ -6,7 +6,8 @@ import com.Ecommerce.domain.User;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/14/2017.
+ * Created by Turian Ovidiu.
+ * This is the interface for ProductService implementation.
  */
 public interface ProductService extends CRUDService<Product>{
 

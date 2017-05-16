@@ -23,7 +23,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Ovi on 5/15/2017.
+ * Created by Turian Ovidu.
+ * This class represent Product Controller.
  */
 @Controller
 public class ProductController {
