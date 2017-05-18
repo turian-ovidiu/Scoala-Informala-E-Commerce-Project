@@ -83,14 +83,17 @@ public class Cart implements DomainObject{
     }
 
     public void calculateTotalCost(){
+        Double tempDouble = 0.0;
         if (getCartDetails().isEmpty()){
-            totalCost = 0.0;
+            totalCost = tempDouble;
         }
         if (!getCartDetails().isEmpty()){
             for (CartDetail cartDetail: getCartDetails()) {
-                totalCost += cartDetail.getProduct().getPrice() * cartDetail.getQuantity();
+                tempDouble += cartDetail.getProduct().getPrice() * cartDetail.getQuantity();
             }
         }
+        totalCost = tempDouble;
+
     }
 
 }
